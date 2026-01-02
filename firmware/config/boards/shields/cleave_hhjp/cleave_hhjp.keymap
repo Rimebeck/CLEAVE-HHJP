@@ -77,15 +77,15 @@
 			label = "Fn";
 			bindings = <
 // ┌────────┬────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┬────────┬────────┐
-    &kp GRAVE &bt1    &bt2     &bt3     &bt4     &bt5     &kp F6                               &kp F7   &kp F8   &kp F9   &kp F10  &kp F11  &kp F12  &kp INS  &btclr
+    &kp C_PWR &bt1    &bt2     &bt3     &bt4     &bt5     &kp F6                               &kp F7   &kp F8   &kp F9   &kp F10  &kp F11  &kp F12  &kp INS  &btclr
 // ├────────┼────────┼────────┼────────┼────────┼────────┤                                    ├────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-    &kp CAPS &trans   &trans   &trans   &trans   &trans                                        &trans   &trans   &trans   &trans   &kp PSCRN &kp SLCK &kp PAUSE_BREAK &trans
+    &kp CAPS &trans   &trans   &trans   &trans   &trans                                        &trans   &trans   &kp PSCRN &kp SLCK &kp PAUSE_BREAK &kp UP &trans &trans
 // ├────────┼────────┼────────┼────────┼────────┼────────┤                                    ├────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-    &trans   &trans   &trans   &trans   &trans   &trans                                        &trans   &trans   &trans   &trans   &trans   &trans   &trans
+    &trans   &kp C_VOL_DN &kp C_VOL_UP &kp C_MUTE &kp C_EJECT &trans                          &kp STAR &kp FSLH &kp HOME &kp PG_UP &kp LEFT &kp RIGHT &trans
 // ├────────┼────────┼────────┼────────┼────────┼────────┤                                    ├────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-    &trans   &trans   &trans   &trans   &trans   &trans                                        &trans   &kp C_MUTE &kp C_VOL_DN &kp C_VOL_UP &trans &trans &kp PG_UP &trans
+    &trans   &trans   &trans   &trans   &trans   &trans                                        &kp PLUS &kp MINUS &kp END &kp PG_DN &kp DOWN &trans   &trans   &trans
 // ├────────┼────────┼────────┼────────┼────────┼────────┤                                    ├────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-    &trans   &trans   &trans   &trans   &trans   &trans                                        &trans   &trans   &trans   &trans   &trans   &kp HOME &kp PG_DN &kp END
+    &trans   &trans   &trans   &trans   &trans   &trans                                        &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans
 // └────────┴────────┴────────┴────────┴────────┴────────┘                                    └────────┴────────┴────────┴────────┴────────┴────────┴────────┴────────┘
 			>;
 		};
