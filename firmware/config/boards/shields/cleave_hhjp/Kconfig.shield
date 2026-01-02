@@ -1,0 +1,8 @@
+# Copyright (c) 2025
+# SPDX-License-Identifier: MIT
+
+config SHIELD_CLEAVE_HHJP_LEFT
+	def_bool $(shields_list_contains,cleave_hhjp_left)
+
+config SHIELD_CLEAVE_HHJP_RIGHT
+	def_bool $(shields_list_contains,cleave_hhjp_right)

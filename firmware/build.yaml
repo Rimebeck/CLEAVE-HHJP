@@ -1,0 +1,9 @@
+# Copyright (c) 2025
+# SPDX-License-Identifier: MIT
+
+---
+include:
+  - board: seeeduino_xiao_ble
+    shield: cleave_hhjp_left
+  - board: seeeduino_xiao_ble
+    shield: cleave_hhjp_right

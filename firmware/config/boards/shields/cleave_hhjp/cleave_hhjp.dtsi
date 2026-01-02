@@ -1,0 +1,26 @@
+/*
+ * Copyright (c) 2025
+ * SPDX-License-Identifier: MIT
+ */
+
+#include <dt-bindings/zmk/matrix_transform.h>
+
+/ {
+	chosen {
+		zmk,battery = &vbatt;
+		zmk,rgbled-widget = &rgbled_widget;
+	};
+
+	vbatt: vbatt {
+		compatible = "zmk,battery-nrf-vddh";
+		label = "BATTERY";
+	};
+
+	rgbled_widget: rgbled_widget {
+		compatible = "zmk,rgbled-widget";
+		label = "RGBLED_WIDGET";
+		red-gpios = <&gpio0 26 GPIO_ACTIVE_LOW>;
+		green-gpios = <&gpio0 30 GPIO_ACTIVE_LOW>;
+		blue-gpios = <&gpio0 6 GPIO_ACTIVE_LOW>;
+	};
+};

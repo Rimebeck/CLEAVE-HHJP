@@ -1,0 +1,41 @@
+/*
+ * Copyright (c) 2025
+ * SPDX-License-Identifier: MIT
+ */
+
+#include "cleave_hhjp.dtsi"
+
+&default_transform {
+	col-offset = <0>;
+};
+
+/ {
+	chosen {
+		zmk,kscan = &kscan0;
+		zmk,matrix-transform = &default_transform;
+	};
+
+	kscan0: kscan_0 {
+		compatible = "zmk,kscan-gpio-matrix";
+		label = "KSCAN";
+		diode-direction = "col2row";
+
+		col-gpios
+			= <&gpio0 2 GPIO_ACTIVE_HIGH>   // COL0 - D0 (P0.02)
+			, <&gpio0 3 GPIO_ACTIVE_HIGH>   // COL1 - D1 (P0.03)
+			, <&gpio0 28 GPIO_ACTIVE_HIGH>  // COL2 - D2 (P0.28)
+			, <&gpio0 29 GPIO_ACTIVE_HIGH>  // COL3 - D3 (P0.29)
+			, <&gpio0 4 GPIO_ACTIVE_HIGH>   // COL4 - D4 (P0.04)
+			, <&gpio0 5 GPIO_ACTIVE_HIGH>   // COL5 - D5 (P0.05)
+			, <&gpio1 11 GPIO_ACTIVE_HIGH>  // COL6 - D6 (P1.11)
+			;
+
+		row-gpios
+			= <&gpio1 12 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  // ROW0 - D7 (P1.12)
+			, <&gpio1 13 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  // ROW1 - D8 (P1.13)
+			, <&gpio1 14 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  // ROW2 - D9 (P1.14)
+			, <&gpio1 15 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  // ROW3 - D10 (P1.15)
+			, <&gpio0 9 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>   // ROW4 - D11 (P0.09 - NFC1, requires CONFIG_NFCT_PINS_AS_GPIOS=y)
+			;
+	};
+};
