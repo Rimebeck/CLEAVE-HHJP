@@ -54,7 +54,7 @@ jobs:
 
       - name: West Build (Cleave HHJP Left)
         working-directory: firmware
-        run: west build -s zmk/app -b seeeduino_xiao_ble -- -DSHIELD=cleave_hhjp_left -DZMK_CONFIG="${GITHUB_WORKSPACE}/firmware/config"
+        run: west build -s zmk/app -b xiao_ble -- -DSHIELD=cleave_hhjp_left -DZMK_CONFIG="${GITHUB_WORKSPACE}/firmware/config"
 
       - name: Cleave HHJP Left Kconfig file
         working-directory: firmware
@@ -62,13 +62,13 @@ jobs:
 
       - name: Rename zmk.uf2
         working-directory: firmware
-        run: cp build/zephyr/zmk.uf2 cleave_hhjp_left-seeeduino_xiao_ble-zmk.uf2
+        run: cp build/zephyr/zmk.uf2 cleave_hhjp_left-xiao_ble-zmk.uf2
 
       - name: Archive (Cleave HHJP Left)
         uses: actions/upload-artifact@v4
         with:
-          name: cleave_hhjp_left-seeeduino_xiao_ble-zmk
-          path: firmware/cleave_hhjp_left-seeeduino_xiao_ble-zmk.uf2
+          name: cleave_hhjp_left-xiao_ble-zmk
+          path: firmware/cleave_hhjp_left-xiao_ble-zmk.uf2
 
       - name: Clean build directory
         working-directory: firmware
@@ -76,7 +76,7 @@ jobs:
 
       - name: West Build (Cleave HHJP Right)
         working-directory: firmware
-        run: west build -s zmk/app -b seeeduino_xiao_ble -- -DSHIELD=cleave_hhjp_right -DZMK_CONFIG="${GITHUB_WORKSPACE}/firmware/config"
+        run: west build -s zmk/app -b xiao_ble -- -DSHIELD=cleave_hhjp_right -DZMK_CONFIG="${GITHUB_WORKSPACE}/firmware/config"
 
       - name: Cleave HHJP Right Kconfig file
         working-directory: firmware
@@ -84,10 +84,10 @@ jobs:
 
       - name: Rename zmk.uf2
         working-directory: firmware
-        run: cp build/zephyr/zmk.uf2 cleave_hhjp_right-seeeduino_xiao_ble-zmk.uf2
+        run: cp build/zephyr/zmk.uf2 cleave_hhjp_right-xiao_ble-zmk.uf2
 
       - name: Archive (Cleave HHJP Right)
         uses: actions/upload-artifact@v4
         with:
-          name: cleave_hhjp_right-seeeduino_xiao_ble-zmk
-          path: firmware/cleave_hhjp_right-seeeduino_xiao_ble-zmk.uf2
+          name: cleave_hhjp_right-xiao_ble-zmk
+          path: firmware/cleave_hhjp_right-xiao_ble-zmk.uf2
