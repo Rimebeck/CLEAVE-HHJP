@@ -38,3 +38,8 @@
 		blue-gpios = <&gpio0 6 GPIO_ACTIVE_LOW>;
 	};
 };
+
+/* NFC pins as GPIO (Zephyr 4.1+) */
+&uicr {
+	nfct-pins-as-gpios;
+};
