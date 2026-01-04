@@ -32,11 +32,11 @@
 			;
 
 		row-gpios
-			= <&gpio1 15 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  // ROW0 - D10 (P1.15) - Physical Row 1
-			, <&gpio0 9 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>   // ROW1 - D11 (P0.09 - NFC1, requires CONFIG_NFCT_PINS_AS_GPIOS=y) - Physical Row 2
-			, <&gpio0 10 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  // ROW2 - D12 (P0.10 - NFC2, requires CONFIG_NFCT_PINS_AS_GPIOS=y) - Physical Row 3
-			, <&gpio1 13 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  // ROW3 - D8 (P1.13) - Physical Row 4
-			, <&gpio1 14 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  // ROW4 - D9 (P1.14) - Physical Row 5
+			= <&gpio1 13 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  // ROW0 - D8 (P1.13)
+			, <&gpio1 14 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  // ROW1 - D9 (P1.14)
+			, <&gpio1 15 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  // ROW2 - D10 (P1.15)
+			, <&gpio0 9 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>   // ROW3 - NFC1 (P0.09)
+			, <&gpio0 10 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  // ROW4 - NFC2 (P0.10)
 			;
 	};
 };
