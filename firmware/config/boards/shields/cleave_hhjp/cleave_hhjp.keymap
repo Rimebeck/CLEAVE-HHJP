@@ -19,86 +19,86 @@
 
 	physical_layout: physical_layout {
 		compatible = "zmk,physical-layout";
-		display-name = "HHKB JP Split";
+		display-name = "Cleave HHJP";
 
 		transform = <&default_transform>;
 
-		keys  // 70 keys: width, height, x, y, r, rx, ry (in centidecimillimeters, 1U = 1905)
+		keys  // 70 keys: width, height, x, y, r, rx, ry (in centi-keyunits, 1U = 100)
 			// Row 0: ESC + 6 keys (left) + gap 2U + 8 keys (right)
-			= <&key_physical_attrs 1905 1905    0    0 0 0 0>  // ESC
-			, <&key_physical_attrs 1905 1905 1905    0 0 0 0>  // 1
-			, <&key_physical_attrs 1905 1905 3810    0 0 0 0>  // 2
-			, <&key_physical_attrs 1905 1905 5715    0 0 0 0>  // 3
-			, <&key_physical_attrs 1905 1905 7620    0 0 0 0>  // 4
-			, <&key_physical_attrs 1905 1905 9525    0 0 0 0>  // 5
-			, <&key_physical_attrs 1905 1905 11430   0 0 0 0>  // 6
-			, <&key_physical_attrs 1905 1905 15240   0 0 0 0>  // 7 (gap 2U = 3810)
-			, <&key_physical_attrs 1905 1905 17145   0 0 0 0>  // 8
-			, <&key_physical_attrs 1905 1905 19050   0 0 0 0>  // 9
-			, <&key_physical_attrs 1905 1905 20955   0 0 0 0>  // 0
-			, <&key_physical_attrs 1905 1905 22860   0 0 0 0>  // -
-			, <&key_physical_attrs 1905 1905 24765   0 0 0 0>  // ^
-			, <&key_physical_attrs 1905 1905 26670   0 0 0 0>  // ¥
-			, <&key_physical_attrs 1905 1905 28575   0 0 0 0>  // BS
+			= <&key_physical_attrs 100 100   0   0 0 0 0>  // ESC
+			, <&key_physical_attrs 100 100 100   0 0 0 0>  // 1
+			, <&key_physical_attrs 100 100 200   0 0 0 0>  // 2
+			, <&key_physical_attrs 100 100 300   0 0 0 0>  // 3
+			, <&key_physical_attrs 100 100 400   0 0 0 0>  // 4
+			, <&key_physical_attrs 100 100 500   0 0 0 0>  // 5
+			, <&key_physical_attrs 100 100 600   0 0 0 0>  // 6
+			, <&key_physical_attrs 100 100 800   0 0 0 0>  // 7 (gap 2U = 200)
+			, <&key_physical_attrs 100 100 900   0 0 0 0>  // 8
+			, <&key_physical_attrs 100 100 1000  0 0 0 0>  // 9
+			, <&key_physical_attrs 100 100 1100  0 0 0 0>  // 0
+			, <&key_physical_attrs 100 100 1200  0 0 0 0>  // -
+			, <&key_physical_attrs 100 100 1300  0 0 0 0>  // ^
+			, <&key_physical_attrs 100 100 1400  0 0 0 0>  // ¥
+			, <&key_physical_attrs 100 100 1500  0 0 0 0>  // BS
 			// Row 1: Tab(1.5U) + 5 keys (left) + gap 2U + 7 keys + Enter(1.25U×2h) (right)
-			, <&key_physical_attrs 2858 1905    0 1905 0 0 0>  // Tab (1.5U = 2857.5, rounded)
-			, <&key_physical_attrs 1905 1905 2858 1905 0 0 0>  // Q
-			, <&key_physical_attrs 1905 1905 4763 1905 0 0 0>  // W
-			, <&key_physical_attrs 1905 1905 6668 1905 0 0 0>  // E
-			, <&key_physical_attrs 1905 1905 8573 1905 0 0 0>  // R
-			, <&key_physical_attrs 1905 1905 10478 1905 0 0 0> // T
-			, <&key_physical_attrs 1905 1905 15240 1905 0 0 0> // Y (gap 2U)
-			, <&key_physical_attrs 1905 1905 17145 1905 0 0 0> // U
-			, <&key_physical_attrs 1905 1905 19050 1905 0 0 0> // I
-			, <&key_physical_attrs 1905 1905 20955 1905 0 0 0> // O
-			, <&key_physical_attrs 1905 1905 22860 1905 0 0 0> // P
-			, <&key_physical_attrs 1905 1905 24765 1905 0 0 0> // @
-			, <&key_physical_attrs 1905 1905 26670 1905 0 0 0> // [
-			, <&key_physical_attrs 2381 3810 28575 1905 0 0 0> // Enter (1.25U×2h = 2381.25×3810)
+			, <&key_physical_attrs 150 100   0 100 0 0 0>  // Tab (1.5U = 150)
+			, <&key_physical_attrs 100 100 150 100 0 0 0>  // Q
+			, <&key_physical_attrs 100 100 250 100 0 0 0>  // W
+			, <&key_physical_attrs 100 100 350 100 0 0 0>  // E
+			, <&key_physical_attrs 100 100 450 100 0 0 0>  // R
+			, <&key_physical_attrs 100 100 550 100 0 0 0>  // T
+			, <&key_physical_attrs 100 100 800 100 0 0 0>  // Y (gap 2U)
+			, <&key_physical_attrs 100 100 900 100 0 0 0>  // U
+			, <&key_physical_attrs 100 100 1000 100 0 0 0> // I
+			, <&key_physical_attrs 100 100 1100 100 0 0 0> // O
+			, <&key_physical_attrs 100 100 1200 100 0 0 0> // P
+			, <&key_physical_attrs 100 100 1300 100 0 0 0> // @
+			, <&key_physical_attrs 100 100 1400 100 0 0 0> // [
+			, <&key_physical_attrs 125 200 1500 100 0 0 0> // Enter (1.25U×2h)
 			// Row 2: Ctrl(1.75U) + 5 keys (left) + gap 2U + 7 keys (right)
-			, <&key_physical_attrs 3334 1905    0 3810 0 0 0>  // Ctrl (1.75U = 3333.75)
-			, <&key_physical_attrs 1905 1905 3334 3810 0 0 0>  // A
-			, <&key_physical_attrs 1905 1905 5239 3810 0 0 0>  // S
-			, <&key_physical_attrs 1905 1905 7144 3810 0 0 0>  // D
-			, <&key_physical_attrs 1905 1905 9049 3810 0 0 0>  // F
-			, <&key_physical_attrs 1905 1905 10954 3810 0 0 0> // G
-			, <&key_physical_attrs 1905 1905 15240 3810 0 0 0> // H (gap 2U)
-			, <&key_physical_attrs 1905 1905 17145 3810 0 0 0> // J
-			, <&key_physical_attrs 1905 1905 19050 3810 0 0 0> // K
-			, <&key_physical_attrs 1905 1905 20955 3810 0 0 0> // L
-			, <&key_physical_attrs 1905 1905 22860 3810 0 0 0> // ;
-			, <&key_physical_attrs 1905 1905 24765 3810 0 0 0> // :
-			, <&key_physical_attrs 1905 1905 26670 3810 0 0 0> // ]
+			, <&key_physical_attrs 175 100   0 200 0 0 0>  // Ctrl (1.75U = 175)
+			, <&key_physical_attrs 100 100 175 200 0 0 0>  // A
+			, <&key_physical_attrs 100 100 275 200 0 0 0>  // S
+			, <&key_physical_attrs 100 100 375 200 0 0 0>  // D
+			, <&key_physical_attrs 100 100 475 200 0 0 0>  // F
+			, <&key_physical_attrs 100 100 575 200 0 0 0>  // G
+			, <&key_physical_attrs 100 100 800 200 0 0 0>  // H (gap 2U)
+			, <&key_physical_attrs 100 100 900 200 0 0 0>  // J
+			, <&key_physical_attrs 100 100 1000 200 0 0 0> // K
+			, <&key_physical_attrs 100 100 1100 200 0 0 0> // L
+			, <&key_physical_attrs 100 100 1200 200 0 0 0> // ;
+			, <&key_physical_attrs 100 100 1300 200 0 0 0> // :
+			, <&key_physical_attrs 100 100 1400 200 0 0 0> // ]
 			// Row 3: LShift(2U) + 5 keys (left) + gap 2U + 6 keys + Up + RShift (right)
-			, <&key_physical_attrs 3810 1905    0 5715 0 0 0>  // LShift (2U = 3810)
-			, <&key_physical_attrs 1905 1905 3810 5715 0 0 0>  // Z
-			, <&key_physical_attrs 1905 1905 5715 5715 0 0 0>  // X
-			, <&key_physical_attrs 1905 1905 7620 5715 0 0 0>  // C
-			, <&key_physical_attrs 1905 1905 9525 5715 0 0 0>  // V
-			, <&key_physical_attrs 1905 1905 11430 5715 0 0 0> // B
-			, <&key_physical_attrs 1905 1905 15240 5715 0 0 0> // N (gap 2U)
-			, <&key_physical_attrs 1905 1905 17145 5715 0 0 0> // M
-			, <&key_physical_attrs 1905 1905 19050 5715 0 0 0> // <
-			, <&key_physical_attrs 1905 1905 20955 5715 0 0 0> // >
-			, <&key_physical_attrs 1905 1905 22860 5715 0 0 0> // /
-			, <&key_physical_attrs 1905 1905 24765 5715 0 0 0> // _
-			, <&key_physical_attrs 1905 1905 26670 5715 0 0 0> // Up
-			, <&key_physical_attrs 1905 1905 28575 5715 0 0 0> // RShift
+			, <&key_physical_attrs 200 100   0 300 0 0 0>  // LShift (2U = 200)
+			, <&key_physical_attrs 100 100 200 300 0 0 0>  // Z
+			, <&key_physical_attrs 100 100 300 300 0 0 0>  // X
+			, <&key_physical_attrs 100 100 400 300 0 0 0>  // C
+			, <&key_physical_attrs 100 100 500 300 0 0 0>  // V
+			, <&key_physical_attrs 100 100 600 300 0 0 0>  // B
+			, <&key_physical_attrs 100 100 800 300 0 0 0>  // N (gap 2U)
+			, <&key_physical_attrs 100 100 900 300 0 0 0>  // M
+			, <&key_physical_attrs 100 100 1000 300 0 0 0> // <
+			, <&key_physical_attrs 100 100 1100 300 0 0 0> // >
+			, <&key_physical_attrs 100 100 1200 300 0 0 0> // /
+			, <&key_physical_attrs 100 100 1300 300 0 0 0> // _
+			, <&key_physical_attrs 100 100 1400 300 0 0 0> // Up
+			, <&key_physical_attrs 100 100 1500 300 0 0 0> // RShift
 			// Row 4: Fn + gap 0.25U + 4 keys + Space(1.25U) (left) + gap 2U + Space(1.25U) + 3 keys + gap 0.25U + 3 arrows (right)
-			, <&key_physical_attrs 1905 1905    0 7620 0 0 0>  // Fn
-			, <&key_physical_attrs 1905 1905 2381 7620 0 0 0>  // Win (gap 0.25U = 476.25)
-			, <&key_physical_attrs 1905 1905 4286 7620 0 0 0>  // Cmd
-			, <&key_physical_attrs 1905 1905 6191 7620 0 0 0>  // Alt
-			, <&key_physical_attrs 1905 1905 8096 7620 0 0 0>  // E/J
-			, <&key_physical_attrs 2381 1905 10001 7620 0 0 0> // Space L (1.25U = 2381.25)
-			, <&key_physical_attrs 2381 1905 15240 7620 0 0 0> // Space R (gap 2U, 1.25U)
-			, <&key_physical_attrs 1905 1905 17621 7620 0 0 0> // E/J
-			, <&key_physical_attrs 1905 1905 19526 7620 0 0 0> // Kana
-			, <&key_physical_attrs 1905 1905 21431 7620 0 0 0> // Alt
-			, <&key_physical_attrs 1905 1905 23336 7620 0 0 0> // Fn
-			, <&key_physical_attrs 1905 1905 25717 7620 0 0 0> // Left (gap 0.25U)
-			, <&key_physical_attrs 1905 1905 27622 7620 0 0 0> // Down
-			, <&key_physical_attrs 1905 1905 29527 7620 0 0 0> // Right
+			, <&key_physical_attrs 100 100   0 400 0 0 0>  // Fn
+			, <&key_physical_attrs 100 100 125 400 0 0 0>  // Win (gap 0.25U = 25)
+			, <&key_physical_attrs 100 100 225 400 0 0 0>  // Cmd
+			, <&key_physical_attrs 100 100 325 400 0 0 0>  // Alt
+			, <&key_physical_attrs 100 100 425 400 0 0 0>  // E/J
+			, <&key_physical_attrs 125 100 525 400 0 0 0>  // Space L (1.25U = 125)
+			, <&key_physical_attrs 125 100 800 400 0 0 0>  // Space R (gap 2U, 1.25U)
+			, <&key_physical_attrs 100 100 925 400 0 0 0>  // E/J
+			, <&key_physical_attrs 100 100 1025 400 0 0 0> // Kana
+			, <&key_physical_attrs 100 100 1125 400 0 0 0> // Alt
+			, <&key_physical_attrs 100 100 1225 400 0 0 0> // Fn
+			, <&key_physical_attrs 100 100 1350 400 0 0 0> // Left (gap 0.25U)
+			, <&key_physical_attrs 100 100 1450 400 0 0 0> // Down
+			, <&key_physical_attrs 100 100 1550 400 0 0 0> // Right
 			;
 	};
 
