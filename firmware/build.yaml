@@ -5,7 +5,7 @@
 include:
   - board: xiao_ble
     shield: cleave_hhjp_left
-    snippet: studio-rpc-usb-uart
+    snippet: studio-rpc-usb-cdc
     cmake-args: -DCONFIG_ZMK_STUDIO=y
   - board: xiao_ble
     shield: cleave_hhjp_right
