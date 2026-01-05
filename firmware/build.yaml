@@ -9,3 +9,6 @@ include:
     cmake-args: -DCONFIG_ZMK_STUDIO=y
   - board: xiao_ble
     shield: cleave_hhjp_right
+
+  - board: xiao_ble
+    shield: settings_reset
