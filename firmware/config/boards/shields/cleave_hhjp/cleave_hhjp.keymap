@@ -13,8 +13,8 @@
 	};
 
 	key_physical_attrs: key_physical_attrs {
-		compatible = "zmk,physical-layout-position";
-		#physical-layout-cells = <5>;
+		compatible = "zmk,key-physical-attrs";
+		#key-cells = <7>;
 	};
 
 	physical_layout: physical_layout {
@@ -23,82 +23,82 @@
 
 		transform = <&default_transform>;
 
-		keys  // 70 keys: x, y, width, height, rotation (in centidecimillimeters, 1U = 1905)
+		keys  // 70 keys: width, height, x, y, r, rx, ry (in centidecimillimeters, 1U = 1905)
 			// Row 0: ESC + 6 keys (left) + gap 2U + 8 keys (right)
-			= <&key_physical_attrs    0    0 1905 1905 0>  // ESC
-			, <&key_physical_attrs 1905    0 1905 1905 0>  // 1
-			, <&key_physical_attrs 3810    0 1905 1905 0>  // 2
-			, <&key_physical_attrs 5715    0 1905 1905 0>  // 3
-			, <&key_physical_attrs 7620    0 1905 1905 0>  // 4
-			, <&key_physical_attrs 9525    0 1905 1905 0>  // 5
-			, <&key_physical_attrs 11430   0 1905 1905 0>  // 6
-			, <&key_physical_attrs 15240   0 1905 1905 0>  // 7 (gap 2U = 3810)
-			, <&key_physical_attrs 17145   0 1905 1905 0>  // 8
-			, <&key_physical_attrs 19050   0 1905 1905 0>  // 9
-			, <&key_physical_attrs 20955   0 1905 1905 0>  // 0
-			, <&key_physical_attrs 22860   0 1905 1905 0>  // -
-			, <&key_physical_attrs 24765   0 1905 1905 0>  // ^
-			, <&key_physical_attrs 26670   0 1905 1905 0>  // ¥
-			, <&key_physical_attrs 28575   0 1905 1905 0>  // BS
+			= <&key_physical_attrs 1905 1905    0    0 0 0 0>  // ESC
+			, <&key_physical_attrs 1905 1905 1905    0 0 0 0>  // 1
+			, <&key_physical_attrs 1905 1905 3810    0 0 0 0>  // 2
+			, <&key_physical_attrs 1905 1905 5715    0 0 0 0>  // 3
+			, <&key_physical_attrs 1905 1905 7620    0 0 0 0>  // 4
+			, <&key_physical_attrs 1905 1905 9525    0 0 0 0>  // 5
+			, <&key_physical_attrs 1905 1905 11430   0 0 0 0>  // 6
+			, <&key_physical_attrs 1905 1905 15240   0 0 0 0>  // 7 (gap 2U = 3810)
+			, <&key_physical_attrs 1905 1905 17145   0 0 0 0>  // 8
+			, <&key_physical_attrs 1905 1905 19050   0 0 0 0>  // 9
+			, <&key_physical_attrs 1905 1905 20955   0 0 0 0>  // 0
+			, <&key_physical_attrs 1905 1905 22860   0 0 0 0>  // -
+			, <&key_physical_attrs 1905 1905 24765   0 0 0 0>  // ^
+			, <&key_physical_attrs 1905 1905 26670   0 0 0 0>  // ¥
+			, <&key_physical_attrs 1905 1905 28575   0 0 0 0>  // BS
 			// Row 1: Tab(1.5U) + 5 keys (left) + gap 2U + 7 keys + Enter(1.25U×2h) (right)
-			, <&key_physical_attrs    0 1905 2858 1905 0>  // Tab (1.5U = 2857.5, rounded)
-			, <&key_physical_attrs 2858 1905 1905 1905 0>  // Q
-			, <&key_physical_attrs 4763 1905 1905 1905 0>  // W
-			, <&key_physical_attrs 6668 1905 1905 1905 0>  // E
-			, <&key_physical_attrs 8573 1905 1905 1905 0>  // R
-			, <&key_physical_attrs 10478 1905 1905 1905 0> // T
-			, <&key_physical_attrs 15240 1905 1905 1905 0> // Y (gap 2U)
-			, <&key_physical_attrs 17145 1905 1905 1905 0> // U
-			, <&key_physical_attrs 19050 1905 1905 1905 0> // I
-			, <&key_physical_attrs 20955 1905 1905 1905 0> // O
-			, <&key_physical_attrs 22860 1905 1905 1905 0> // P
-			, <&key_physical_attrs 24765 1905 1905 1905 0> // @
-			, <&key_physical_attrs 26670 1905 1905 1905 0> // [
-			, <&key_physical_attrs 28575 1905 2381 3810 0> // Enter (1.25U×2h = 2381.25×3810)
+			, <&key_physical_attrs 2858 1905    0 1905 0 0 0>  // Tab (1.5U = 2857.5, rounded)
+			, <&key_physical_attrs 1905 1905 2858 1905 0 0 0>  // Q
+			, <&key_physical_attrs 1905 1905 4763 1905 0 0 0>  // W
+			, <&key_physical_attrs 1905 1905 6668 1905 0 0 0>  // E
+			, <&key_physical_attrs 1905 1905 8573 1905 0 0 0>  // R
+			, <&key_physical_attrs 1905 1905 10478 1905 0 0 0> // T
+			, <&key_physical_attrs 1905 1905 15240 1905 0 0 0> // Y (gap 2U)
+			, <&key_physical_attrs 1905 1905 17145 1905 0 0 0> // U
+			, <&key_physical_attrs 1905 1905 19050 1905 0 0 0> // I
+			, <&key_physical_attrs 1905 1905 20955 1905 0 0 0> // O
+			, <&key_physical_attrs 1905 1905 22860 1905 0 0 0> // P
+			, <&key_physical_attrs 1905 1905 24765 1905 0 0 0> // @
+			, <&key_physical_attrs 1905 1905 26670 1905 0 0 0> // [
+			, <&key_physical_attrs 2381 3810 28575 1905 0 0 0> // Enter (1.25U×2h = 2381.25×3810)
 			// Row 2: Ctrl(1.75U) + 5 keys (left) + gap 2U + 7 keys (right)
-			, <&key_physical_attrs    0 3810 3334 1905 0>  // Ctrl (1.75U = 3333.75)
-			, <&key_physical_attrs 3334 3810 1905 1905 0>  // A
-			, <&key_physical_attrs 5239 3810 1905 1905 0>  // S
-			, <&key_physical_attrs 7144 3810 1905 1905 0>  // D
-			, <&key_physical_attrs 9049 3810 1905 1905 0>  // F
-			, <&key_physical_attrs 10954 3810 1905 1905 0> // G
-			, <&key_physical_attrs 15240 3810 1905 1905 0> // H (gap 2U)
-			, <&key_physical_attrs 17145 3810 1905 1905 0> // J
-			, <&key_physical_attrs 19050 3810 1905 1905 0> // K
-			, <&key_physical_attrs 20955 3810 1905 1905 0> // L
-			, <&key_physical_attrs 22860 3810 1905 1905 0> // ;
-			, <&key_physical_attrs 24765 3810 1905 1905 0> // :
-			, <&key_physical_attrs 26670 3810 1905 1905 0> // ]
+			, <&key_physical_attrs 3334 1905    0 3810 0 0 0>  // Ctrl (1.75U = 3333.75)
+			, <&key_physical_attrs 1905 1905 3334 3810 0 0 0>  // A
+			, <&key_physical_attrs 1905 1905 5239 3810 0 0 0>  // S
+			, <&key_physical_attrs 1905 1905 7144 3810 0 0 0>  // D
+			, <&key_physical_attrs 1905 1905 9049 3810 0 0 0>  // F
+			, <&key_physical_attrs 1905 1905 10954 3810 0 0 0> // G
+			, <&key_physical_attrs 1905 1905 15240 3810 0 0 0> // H (gap 2U)
+			, <&key_physical_attrs 1905 1905 17145 3810 0 0 0> // J
+			, <&key_physical_attrs 1905 1905 19050 3810 0 0 0> // K
+			, <&key_physical_attrs 1905 1905 20955 3810 0 0 0> // L
+			, <&key_physical_attrs 1905 1905 22860 3810 0 0 0> // ;
+			, <&key_physical_attrs 1905 1905 24765 3810 0 0 0> // :
+			, <&key_physical_attrs 1905 1905 26670 3810 0 0 0> // ]
 			// Row 3: LShift(2U) + 5 keys (left) + gap 2U + 6 keys + Up + RShift (right)
-			, <&key_physical_attrs    0 5715 3810 1905 0>  // LShift (2U = 3810)
-			, <&key_physical_attrs 3810 5715 1905 1905 0>  // Z
-			, <&key_physical_attrs 5715 5715 1905 1905 0>  // X
-			, <&key_physical_attrs 7620 5715 1905 1905 0>  // C
-			, <&key_physical_attrs 9525 5715 1905 1905 0>  // V
-			, <&key_physical_attrs 11430 5715 1905 1905 0> // B
-			, <&key_physical_attrs 15240 5715 1905 1905 0> // N (gap 2U)
-			, <&key_physical_attrs 17145 5715 1905 1905 0> // M
-			, <&key_physical_attrs 19050 5715 1905 1905 0> // <
-			, <&key_physical_attrs 20955 5715 1905 1905 0> // >
-			, <&key_physical_attrs 22860 5715 1905 1905 0> // /
-			, <&key_physical_attrs 24765 5715 1905 1905 0> // _
-			, <&key_physical_attrs 26670 5715 1905 1905 0> // Up
-			, <&key_physical_attrs 28575 5715 1905 1905 0> // RShift
+			, <&key_physical_attrs 3810 1905    0 5715 0 0 0>  // LShift (2U = 3810)
+			, <&key_physical_attrs 1905 1905 3810 5715 0 0 0>  // Z
+			, <&key_physical_attrs 1905 1905 5715 5715 0 0 0>  // X
+			, <&key_physical_attrs 1905 1905 7620 5715 0 0 0>  // C
+			, <&key_physical_attrs 1905 1905 9525 5715 0 0 0>  // V
+			, <&key_physical_attrs 1905 1905 11430 5715 0 0 0> // B
+			, <&key_physical_attrs 1905 1905 15240 5715 0 0 0> // N (gap 2U)
+			, <&key_physical_attrs 1905 1905 17145 5715 0 0 0> // M
+			, <&key_physical_attrs 1905 1905 19050 5715 0 0 0> // <
+			, <&key_physical_attrs 1905 1905 20955 5715 0 0 0> // >
+			, <&key_physical_attrs 1905 1905 22860 5715 0 0 0> // /
+			, <&key_physical_attrs 1905 1905 24765 5715 0 0 0> // _
+			, <&key_physical_attrs 1905 1905 26670 5715 0 0 0> // Up
+			, <&key_physical_attrs 1905 1905 28575 5715 0 0 0> // RShift
 			// Row 4: Fn + gap 0.25U + 4 keys + Space(1.25U) (left) + gap 2U + Space(1.25U) + 3 keys + gap 0.25U + 3 arrows (right)
-			, <&key_physical_attrs    0 7620 1905 1905 0>  // Fn
-			, <&key_physical_attrs 2381 7620 1905 1905 0>  // Win (gap 0.25U = 476.25)
-			, <&key_physical_attrs 4286 7620 1905 1905 0>  // Cmd
-			, <&key_physical_attrs 6191 7620 1905 1905 0>  // Alt
-			, <&key_physical_attrs 8096 7620 1905 1905 0>  // E/J
-			, <&key_physical_attrs 10001 7620 2381 1905 0> // Space L (1.25U = 2381.25)
-			, <&key_physical_attrs 15240 7620 2381 1905 0> // Space R (gap 2U, 1.25U)
-			, <&key_physical_attrs 17621 7620 1905 1905 0> // E/J
-			, <&key_physical_attrs 19526 7620 1905 1905 0> // Kana
-			, <&key_physical_attrs 21431 7620 1905 1905 0> // Alt
-			, <&key_physical_attrs 23336 7620 1905 1905 0> // Fn
-			, <&key_physical_attrs 25717 7620 1905 1905 0> // Left (gap 0.25U)
-			, <&key_physical_attrs 27622 7620 1905 1905 0> // Down
-			, <&key_physical_attrs 29527 7620 1905 1905 0> // Right
+			, <&key_physical_attrs 1905 1905    0 7620 0 0 0>  // Fn
+			, <&key_physical_attrs 1905 1905 2381 7620 0 0 0>  // Win (gap 0.25U = 476.25)
+			, <&key_physical_attrs 1905 1905 4286 7620 0 0 0>  // Cmd
+			, <&key_physical_attrs 1905 1905 6191 7620 0 0 0>  // Alt
+			, <&key_physical_attrs 1905 1905 8096 7620 0 0 0>  // E/J
+			, <&key_physical_attrs 2381 1905 10001 7620 0 0 0> // Space L (1.25U = 2381.25)
+			, <&key_physical_attrs 2381 1905 15240 7620 0 0 0> // Space R (gap 2U, 1.25U)
+			, <&key_physical_attrs 1905 1905 17621 7620 0 0 0> // E/J
+			, <&key_physical_attrs 1905 1905 19526 7620 0 0 0> // Kana
+			, <&key_physical_attrs 1905 1905 21431 7620 0 0 0> // Alt
+			, <&key_physical_attrs 1905 1905 23336 7620 0 0 0> // Fn
+			, <&key_physical_attrs 1905 1905 25717 7620 0 0 0> // Left (gap 0.25U)
+			, <&key_physical_attrs 1905 1905 27622 7620 0 0 0> // Down
+			, <&key_physical_attrs 1905 1905 29527 7620 0 0 0> // Right
 			;
 	};
 
