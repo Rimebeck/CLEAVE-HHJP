@@ -5,12 +5,16 @@ on:
     branches:
       - main
     paths:
-      - 'firmware/**'
+      - 'config/**'
+      - 'build.yaml'
+      - '.github/workflows/build-firmware.yml'
   pull_request:
     branches:
       - main
     paths:
-      - 'firmware/**'
+      - 'config/**'
+      - 'build.yaml'
+      - '.github/workflows/build-firmware.yml'
   workflow_dispatch:
 
 jobs:
@@ -30,7 +34,7 @@ jobs:
           sudo chmod +x /usr/local/bin/yq
 
           # Parse build.yaml and convert to JSON matrix
-          MATRIX=$(yq -o=json '.include' firmware/build.yaml | jq -c)
+          MATRIX=$(yq -o=json '.include' build.yaml | jq -c)
           echo "build-matrix=$MATRIX" >> $GITHUB_OUTPUT
 
           # Debug output
@@ -57,31 +61,27 @@ jobs:
           cache-name: cache-zephyr-modules
         with:
           path: |
-            firmware/modules/
-            firmware/tools/
-            firmware/zephyr/
-            firmware/bootloader/
-            firmware/zmk/
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('firmware/config/west.yml') }}
+            modules/
+            tools/
+            zephyr/
+            bootloader/
+            zmk/
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('config/west.yml') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
             ${{ runner.os }}-
 
       - name: West Init
-        working-directory: firmware
         run: west init -l config
 
       - name: West Update
-        working-directory: firmware
         run: west update
 
       - name: West Zephyr export
-        working-directory: firmware
         run: west zephyr-export
 
       - name: Build (${{ matrix.shield }} - ${{ matrix.board }})
-        working-directory: firmware
         run: |
           # Build command with conditional snippet support
           SNIPPET_ARG=""
@@ -94,19 +94,17 @@ jobs:
           west build -s zmk/app -b ${{ matrix.board }} \
             ${SNIPPET_ARG} \
             -- -DSHIELD=${{ matrix.shield }} \
-            -DZMK_CONFIG="${GITHUB_WORKSPACE}/firmware/config" \
+            -DZMK_CONFIG="${GITHUB_WORKSPACE}/config" \
             ${CMAKE_ARGS}
 
       - name: ${{ matrix.shield }} Kconfig file
-        working-directory: firmware
         run: cat build/zephyr/.config | grep -v "^#" | grep -v "^$"
 
       - name: Rename zmk.uf2
-        working-directory: firmware
         run: cp build/zephyr/zmk.uf2 ${{ matrix.shield }}-${{ matrix.board }}-zmk.uf2
 
       - name: Archive (${{ matrix.shield }})
         uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.shield }}-${{ matrix.board }}-zmk
-          path: firmware/${{ matrix.shield }}-${{ matrix.board }}-zmk.uf2
+          path: ${{ matrix.shield }}-${{ matrix.board }}-zmk.uf2
