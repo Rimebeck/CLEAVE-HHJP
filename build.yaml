@@ -4,10 +4,10 @@
 ---
 include:
   - board: xiao_ble
-    shield: cleave_hhjp_left
+    shield: cleave_hhjp_left rgbled_adapter
     snippet: studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_STUDIO=y
   - board: xiao_ble
-    shield: cleave_hhjp_right
+    shield: cleave_hhjp_right rgbled_adapter
   - board: xiao_ble
     shield: settings_reset
