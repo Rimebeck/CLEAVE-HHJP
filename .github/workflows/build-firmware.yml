@@ -54,7 +54,7 @@ jobs:
 
       - name: West Build (Cleave HHJP Left)
         working-directory: firmware
-        run: west build -s zmk/app -b xiao_ble -- -DSHIELD=cleave_hhjp_left -DZMK_CONFIG="${GITHUB_WORKSPACE}/firmware/config"
+        run: west build -s zmk/app -b xiao_ble -S studio-rpc-usb-uart -- -DSHIELD=cleave_hhjp_left -DZMK_CONFIG="${GITHUB_WORKSPACE}/firmware/config" -DCONFIG_ZMK_STUDIO=y
 
       - name: Cleave HHJP Left Kconfig file
         working-directory: firmware
