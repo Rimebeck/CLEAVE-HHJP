@@ -1,112 +1,20 @@
-name: Build Firmware
-
+name: Build ZMK firmware
 on:
   push:
     branches:
       - main
     paths:
-      - 'firmware/**'
+      - 'config/**'
+      - 'build.yaml'
+      - '.github/workflows/build-firmware.yml'
   pull_request:
     branches:
       - main
     paths:
-      - 'firmware/**'
-  workflow_dispatch:
+      - 'config/**'
+      - 'build.yaml'
+      - '.github/workflows/build-firmware.yml'
 
 jobs:
-  read-build-config:
-    runs-on: ubuntu-latest
-    outputs:
-      build-matrix: ${{ steps.read-config.outputs.build-matrix }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Read build.yaml
-        id: read-config
-        run: |
-          # Install yq if not available
-          sudo wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
-          sudo chmod +x /usr/local/bin/yq
-
-          # Parse build.yaml and convert to JSON matrix
-          MATRIX=$(yq -o=json '.include' firmware/build.yaml | jq -c)
-          echo "build-matrix=$MATRIX" >> $GITHUB_OUTPUT
-
-          # Debug output
-          echo "Build matrix:"
-          echo "$MATRIX" | jq .
-
   build:
-    runs-on: ubuntu-latest
-    container:
-      image: zmkfirmware/zmk-build-arm:stable
-    needs: read-build-config
-    name: Build
-    strategy:
-      fail-fast: false
-      matrix:
-        include: ${{ fromJSON(needs.read-build-config.outputs.build-matrix) }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Cache west modules
-        uses: actions/cache@v4
-        env:
-          cache-name: cache-zephyr-modules
-        with:
-          path: |
-            firmware/modules/
-            firmware/tools/
-            firmware/zephyr/
-            firmware/bootloader/
-            firmware/zmk/
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('firmware/config/west.yml') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
-
-      - name: West Init
-        working-directory: firmware
-        run: west init -l config
-
-      - name: West Update
-        working-directory: firmware
-        run: west update
-
-      - name: West Zephyr export
-        working-directory: firmware
-        run: west zephyr-export
-
-      - name: Build (${{ matrix.shield }} - ${{ matrix.board }})
-        working-directory: firmware
-        run: |
-          # Build command with conditional snippet support
-          SNIPPET_ARG=""
-          if [ -n "${{ matrix.snippet }}" ]; then
-            SNIPPET_ARG="-S ${{ matrix.snippet }}"
-          fi
-
-          CMAKE_ARGS="${{ matrix.cmake-args || '' }}"
-
-          west build -s zmk/app -b ${{ matrix.board }} \
-            ${SNIPPET_ARG} \
-            -- -DSHIELD=${{ matrix.shield }} \
-            -DZMK_CONFIG="${GITHUB_WORKSPACE}/firmware/config" \
-            ${CMAKE_ARGS}
-
-      - name: ${{ matrix.shield }} Kconfig file
-        working-directory: firmware
-        run: cat build/zephyr/.config | grep -v "^#" | grep -v "^$"
-
-      - name: Rename zmk.uf2
-        working-directory: firmware
-        run: cp build/zephyr/zmk.uf2 ${{ matrix.shield }}-${{ matrix.board }}-zmk.uf2
-
-      - name: Archive (${{ matrix.shield }})
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ matrix.shield }}-${{ matrix.board }}-zmk
-          path: firmware/${{ matrix.shield }}-${{ matrix.board }}-zmk.uf2
+    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@v0.3
