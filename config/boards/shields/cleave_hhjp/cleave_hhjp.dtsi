@@ -11,6 +11,12 @@
 		zmk,rgbled-widget = &rgbled_widget;
 	};
 
+	aliases {
+		led-red = &led0;
+		led-green = &led1;
+		led-blue = &led2;
+	};
+
 	default_transform: keymap_transform_0 {
 		compatible = "zmk,matrix-transform";
 		columns = <15>;
