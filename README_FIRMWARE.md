@@ -36,20 +36,20 @@ docker run --rm -v $(pwd):/workspace -w /workspace zmkfirmware/zmk-build-arm:sta
 
 # 左側ビルド
 docker run --rm -v $(pwd):/workspace -w /workspace zmkfirmware/zmk-build-arm:stable \
-  west build -s zmk/app -b seeeduino_xiao_ble -- -DSHIELD=cleave_hhjp_left -DZMK_CONFIG=/workspace/config
+  west build -s zmk/app -b xiao_ble -- -DSHIELD=cleave_hhjp_left -DZMK_CONFIG=/workspace/config
 
 # UF2ファイルをコピー
-cp build/zephyr/zmk.uf2 cleave_hhjp_left-seeeduino_xiao_ble-zmk.uf2
+cp build/zephyr/zmk.uf2 cleave_hhjp_left-xiao_ble-zmk.uf2
 
 # ビルドディレクトリをクリーンアップ
 rm -rf build
 
 # 右側ビルド
 docker run --rm -v $(pwd):/workspace -w /workspace zmkfirmware/zmk-build-arm:stable \
-  west build -s zmk/app -b seeeduino_xiao_ble -- -DSHIELD=cleave_hhjp_right -DZMK_CONFIG=/workspace/config
+  west build -s zmk/app -b xiao_ble -- -DSHIELD=cleave_hhjp_right -DZMK_CONFIG=/workspace/config
 
 # UF2ファイルをコピー
-cp build/zephyr/zmk.uf2 cleave_hhjp_right-seeeduino_xiao_ble-zmk.uf2
+cp build/zephyr/zmk.uf2 cleave_hhjp_right-xiao_ble-zmk.uf2
 ```
 
 ## ファームウェア書き込み

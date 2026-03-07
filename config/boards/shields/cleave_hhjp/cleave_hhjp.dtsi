@@ -30,7 +30,7 @@
 		io-channels = <&adc 7>;
 		output-ohms = <510000>;
 		full-ohms = <(510000 + 1000000)>;
-		power-gpios = <&gpio0 14 GPIO_ACTIVE_LOW>;
+		power-gpios = <&gpio0 14 (GPIO_OPEN_DRAIN | GPIO_ACTIVE_LOW)>;
 	};
 
 	rgbled_widget: rgbled_widget {
