@@ -19,6 +19,15 @@
 			RC(4,0) RC(4,1) RC(4,2) RC(4,3) RC(4,4) RC(4,5)           RC(4,7) RC(4,8) RC(4,9) RC(4,10) RC(4,11) RC(4,12) RC(4,13) RC(4,14)
 		>;
 	};
+
+	/* Drive P0.13 LOW at boot */
+	gpio_pins {
+		compatible = "gpio-leds";
+		status = "okay";
+		p013_low: p013_low {
+			gpios = <&gpio0 13 GPIO_ACTIVE_HIGH>;
+		};
+	};
 };
 
 /* NFC pins as GPIO */
