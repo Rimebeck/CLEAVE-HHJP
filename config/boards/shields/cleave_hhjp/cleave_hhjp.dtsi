@@ -20,13 +20,14 @@
 		>;
 	};
 
-	/* Drive P0.13 LOW at boot */
-	gpio_pins {
-		compatible = "gpio-leds";
-		status = "okay";
-		p013_low: p013_low {
-			gpios = <&gpio0 13 GPIO_ACTIVE_HIGH>;
-		};
+};
+
+/* Drive P0.13 LOW at boot for BQ25101 HICHG (LOW = 100mA charge) */
+&gpio0 {
+	hichg: hichg {
+		gpio-hog;
+		gpios = <13 GPIO_ACTIVE_HIGH>;
+		output-low;
 	};
 };
 

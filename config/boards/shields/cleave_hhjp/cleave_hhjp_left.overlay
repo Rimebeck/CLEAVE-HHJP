@@ -30,7 +30,7 @@
 			, <&gpio1 13 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  // ROW1 - D8 (P1.13)
 			, <&gpio1 14 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  // ROW2 - D9 (P1.14)
 			, <&gpio1 15 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  // ROW3 - D10 (P1.15)
-			, <&gpio0 9 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>   // ROW4 - D11 (P0.09 - NFC1, requires CONFIG_NFCT_PINS_AS_GPIOS=y)
+			, <&gpio0 9 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>   // ROW4 - D11 (P0.09 - NFC1)
 			;
 	};
 };
