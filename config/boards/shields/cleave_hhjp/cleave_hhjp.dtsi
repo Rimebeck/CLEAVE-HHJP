@@ -22,12 +22,12 @@
 
 };
 
-/* Drive P0.13 LOW at boot for BQ25101 HICHG (LOW = 100mA charge) */
+/* Drive P0.13 HIGH at boot for BQ25101 HICHG (HIGH = 200mA charge) */
 &gpio0 {
 	hichg: hichg {
 		gpio-hog;
 		gpios = <13 GPIO_ACTIVE_HIGH>;
-		output-low;
+		output-high;
 	};
 };
 
