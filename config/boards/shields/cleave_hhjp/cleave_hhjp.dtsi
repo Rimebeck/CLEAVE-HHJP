@@ -30,7 +30,7 @@
  * - Output HIGH:  Disrupts ISET     → 0mA (charging stops)
  */
 &gpio0 {
-	charge_current: charge_current {
+	hichg: hichg {
 		gpio-hog;
 		gpios = <13 GPIO_ACTIVE_HIGH>;
 		output-low;
