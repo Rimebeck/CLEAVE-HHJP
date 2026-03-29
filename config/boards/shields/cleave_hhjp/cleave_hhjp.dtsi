@@ -22,9 +22,15 @@
 
 };
 
-/* Drive P0.13 LOW at boot for BQ25101 HICHG (LOW = 100mA charge) */
+/*
+ * Charging current control via ISET parallel resistor
+ * P0.13 is connected to BQ25101 ISET pin through 2.7kΩ on the XIAO board.
+ * - Input (Hi-Z): RISET=2.7kΩ only  → 50mA
+ * - Output LOW:   2.7k∥2.7k=1.35kΩ → 100mA
+ * - Output HIGH:  Disrupts ISET     → 0mA (charging stops)
+ */
 &gpio0 {
-	hichg: hichg {
+	charge_current: charge_current {
 		gpio-hog;
 		gpios = <13 GPIO_ACTIVE_HIGH>;
 		output-low;
