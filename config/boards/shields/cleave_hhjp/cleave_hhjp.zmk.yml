@@ -1,0 +1,8 @@
+file_format: "1"
+id: cleave_hhjp
+name: Cleave HHJP
+type: shield
+url: https://github.com/junpei/Cleave-HHJP
+requires: [seeeduino_xiao_ble]
+features:
+  - keys
