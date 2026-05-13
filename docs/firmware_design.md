@@ -268,7 +268,8 @@ ZMK用のファームウェアは、**zmk-configリポジトリ**として構築
 zmk-config/
 ├── .github/
 │   └── workflows/
-│       └── build.yml              # GitHub Actionsビルド定義
+│       ├── build-firmware.yml     # GitHub Actionsビルド定義
+│       └── release.yml            # 手動Release昇格ワークフロー
 ├── config/
 │   ├── boards/
 │   │   └── shields/
@@ -284,6 +285,8 @@ zmk-config/
 │   │           └── Kconfig.defconfig             # デフォルト設定
 │   └── west.yml                   # Westマニフェスト（依存関係定義）
 ├── build.yaml                     # ビルドターゲット定義
+├── docs/
+│   └── firmware_design.md         # ファームウェア設計書
 └── README.md                      # プロジェクト説明
 ```
 
@@ -293,7 +296,8 @@ zmk-config/
 
 | ファイル | 役割 |
 |---------|------|
-| `.github/workflows/build.yml` | プッシュ時の自動ビルド、UF2生成、Release配置 |
+| `.github/workflows/build-firmware.yml` | `main` へのpush/PR時にZMKの再利用ワークフローでUF2を生成 |
+| `.github/workflows/release.yml` | 生成済みartifactを指定バージョンのGitHub Releaseへ昇格 |
 
 #### 3.3.2 シールド定義ファイル
 
@@ -329,7 +333,7 @@ zmk-config/
 | ファイル | 役割 |
 |---------|------|
 | `config/west.yml` | Westマニフェスト（zmk-rgbled-widget等の外部依存） |
-| `build.yaml` | ビルドターゲット定義（左右両側を自動ビルド） |
+| `build.yaml` | ビルドターゲット定義（左右両側、ZMK Studio、settings resetを自動ビルド） |
 
 ### 3.4 外部依存関係
 
@@ -364,9 +368,15 @@ zmk-config/
 | `CONFIG_ZMK_IDLE_TIMEOUT` | `30000` | アイドルタイムアウト 30秒 (30000ms) |
 | `CONFIG_ZMK_SLEEP` | `y` | スリープモード有効化 |
 | `CONFIG_ZMK_IDLE_SLEEP_TIMEOUT` | `900000` | スリープ移行時間 15分 (900000ms) |
-| `CONFIG_ZMK_STUDIO` | `y` | **ZMK Studio有効化（動的キーマップ変更）** |
+| `CONFIG_SETTINGS` | `y` | キーマップ変更などの永続化に必要 |
+| `CONFIG_NVS` | `y` | 設定保存用NVSストレージ有効化 |
+| `CONFIG_FLASH` | `y` | フラッシュ書き込み有効化 |
+| `CONFIG_FLASH_PAGE_LAYOUT` | `y` | フラッシュページ情報有効化 |
+| `CONFIG_FLASH_MAP` | `y` | フラッシュ領域マップ有効化 |
 
 **重要**: `CONFIG_NFCT_PINS_AS_GPIOS=y` がない場合、D11/D12がGPIOとして動作せず、マトリックススキャンが正常に動作しません。
+
+**現状確認メモ**: 本設計では `CONFIG_NFCT_PINS_AS_GPIOS=y` を必須としています。実際の設定ファイルにこの項目がない場合は、ファームウェア修正タスクとして追加を確認してください。
 
 ### 4.2 左側設定 (cleave_hhjp_left.conf)
 
@@ -374,6 +384,8 @@ zmk-config/
 |---------|-----|------|
 | `CONFIG_ZMK_SPLIT_ROLE_CENTRAL` | `y` | セントラル役割（右側XIAOへの接続） |
 | `CONFIG_ZMK_SPLIT_BLE_CENTRAL_PERIPHERALS` | `1` | セントラルが接続するペリフェラル数（右側の1台） |
+| `CONFIG_ZMK_STUDIO` | `y` | ZMK Studio有効化（左側/セントラル側のみ） |
+| `CONFIG_ZMK_STUDIO_LOCKING` | `n` | ZMK Studioでの変更ロックを無効化 |
 
 **注**: 左側はセントラルとして右側に接続しつつ、ホストPCに対してはペリフェラルとして動作します。ZMKではこの構成が標準でサポートされており、追加設定は不要です。
 
@@ -381,7 +393,9 @@ zmk-config/
 
 | 設定項目 | 値 | 説明 |
 |---------|-----|------|
-| `CONFIG_ZMK_SPLIT_BLE_ROLE_PERIPHERAL` | `y` | ペリフェラル役割（左側に接続） |
+| `CONFIG_ZMK_STUDIO` | `n` | ZMK Studioは左側/セントラル側のみで有効化 |
+
+**注**: 右側は `CONFIG_ZMK_SPLIT_ROLE_CENTRAL` を設定しないことで、分割BLEのペリフェラルとして動作します。
 
 ### 4.4 完全ワイヤレス動作のための重要設定
 
@@ -489,7 +503,6 @@ ZMK Studioで動的にキーマップを変更可能にするため、`physical_
 |-------------|-----------|------|
 | 0 | default_layer | デフォルトキー配列（HHKB JP配列） |
 | 1 | fn_layer | Fnキー押下時（F1-F12、メディア、ナビゲーション） |
-| 2 | bt_layer | Bluetooth制御（デバイス切替、ペアリング） |
 
 **デフォルトレイヤー (Layer 0)**:
 - HHKB JP配列の標準キー配置
@@ -500,11 +513,11 @@ ZMK Studioで動的にキーマップを変更可能にするため、`physical_
 - メディアキー (再生/一時停止、音量調整等)
 - 画面輝度調整
 - 矢印キー等のナビゲーション
+- Bluetoothプロファイル操作（`Fn` + `Ctrl` + `1`〜`5` で `BT_SEL 0`〜`BT_SEL 4`、`Fn` + `Ctrl` + `Backspace` で `BT_CLR`）
 
-**Bluetoothレイヤー (Layer 2)**:
-- デバイス切替 (BT0-BT4): 最大5台までペアリング可能
-- ペアリングクリア
-- Bluetoothプロファイル管理
+**Bluetooth操作の実装メモ**:
+- 現行キーマップでは専用のBluetoothレイヤーを追加せず、Fnレイヤー上の `zmk,behavior-mod-morph` で実装します。
+- `Ctrl` が押されていない場合、該当キーは通常の `F1`〜`F5` / `Delete` として動作します。
 
 ### 6.4 キーコード例
 
@@ -576,45 +589,126 @@ GitHub ActionsでビルドされたUF2ファイルをXIAOに書き込み
 
 このプロジェクトでは、GitHub Actionsを使用して以下を自動化します：
 
-1. zmk-configリポジトリへのコミット/プッシュを検知
-2. ZMKファームウェアを左右両側分ビルド
-3. UF2ファイルを生成
-4. GitHubリリースに自動アップロード
+1. `config/`、`build.yaml`、ビルドワークフローへの変更を検知
+2. ZMK公式の再利用ワークフローでファームウェアをビルド
+3. 左側、右側、settings reset用のUF2ファイルを生成
+4. 必要に応じて生成済みartifactをGitHub Releaseへ昇格
 
-### 8.2 ビルドワークフロー (.github/workflows/build.yml)
+### 8.2 ビルドワークフロー (.github/workflows/build-firmware.yml)
 
 **トリガー**:
 - `main` ブランチへのプッシュ
+- `main` ブランチ向けのPull Request
 - `config/` ディレクトリの変更
+- `build.yaml` の変更
+- `.github/workflows/build-firmware.yml` の変更
+
+**ワークフロー内容**:
+```yaml
+name: Build ZMK firmware
+on:
+   push:
+      branches:
+         - main
+      paths:
+         - 'config/**'
+         - 'build.yaml'
+         - '.github/workflows/build-firmware.yml'
+   pull_request:
+      branches:
+         - main
+      paths:
+         - 'config/**'
+         - 'build.yaml'
+         - '.github/workflows/build-firmware.yml'
+
+jobs:
+   build:
+      uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@v0.3
+```
 
 **ビルドターゲット** (`build.yaml` で定義):
-- `cleave_hhjp_left` (左側)
-- `cleave_hhjp_right` (右側)
+- `xiao_ble` + `cleave_hhjp_left rgbled_adapter` (左側、ZMK Studio対応)
+- `xiao_ble` + `cleave_hhjp_right rgbled_adapter` (右側)
+- `xiao_ble` + `settings_reset` (設定リセット用)
 
 **成果物**:
-- `cleave_hhjp_left-seeeduino_xiao_ble-zmk.uf2`
-- `cleave_hhjp_right-seeeduino_xiao_ble-zmk.uf2`
+- Actionsの `firmware` artifact ZIP内に、各ビルドターゲットのUF2ファイルが生成されます。
+- ファイル名はZMKのビルドワークフローにより、board/shield構成から生成されます。書き込み時は左側用、右側用、settings reset用を取り違えないようにしてください。
 
 ### 8.3 ビルドプロセス
 
-1. **環境構築**: Zephyr SDK、West、依存パッケージのインストール
-2. **Westワークスペース初期化**: `west init`, `west update`
-3. **ビルド実行**: `west build` で左右両側をビルド
-4. **アーティファクトアップロード**: UF2ファイルをGitHub Artifactsに保存
-5. **リリース作成**: タグプッシュ時に自動でRelease作成、UF2添付
+1. **build.yaml読込**: ZMK公式ワークフローが `build.yaml` からビルドマトリックスを生成
+2. **Westワークスペース初期化**: `config/west.yml` に基づきZMK本体と外部モジュールを取得
+3. **ビルド実行**: `west build` で各ターゲットをビルド
+4. **アーティファクトアップロード**: UF2ファイルを `firmware` artifactとして保存
+5. **リリース昇格**: 必要に応じて `release.yml` を手動実行し、artifactをReleaseへ添付
 
 ### 8.4 build.yaml 定義
 
 **記述内容**:
 ```yaml
+# Copyright (c) 2025
+# SPDX-License-Identifier: MIT
+
+---
 include:
-  - board: seeeduino_xiao_ble
-    shield: cleave_hhjp_left
-  - board: seeeduino_xiao_ble
-    shield: cleave_hhjp_right
+- { board: xiao_ble, shield: "cleave_hhjp_left rgbled_adapter", snippet: studio-rpc-usb-uart, cmake-args: -DCONFIG_ZMK_STUDIO=y }
+- { board: xiao_ble, shield: "cleave_hhjp_right rgbled_adapter" }
+- { board: xiao_ble, shield: settings_reset }
 ```
 
-これにより、GitHub Actionsが自動的に両側をビルドします。
+**ポイント**:
+- `xiao_ble` はXIAO nRF52840系のZMK用board名です。
+- `rgbled_adapter` はzmk-rgbled-widget連携用の追加shieldです。
+- `studio-rpc-usb-uart` と `CONFIG_ZMK_STUDIO=y` は、ZMK Studioを左側（セントラル側）で使うために左側ターゲットだけへ設定します。
+- `settings_reset` はBluetoothペアリング情報や永続化設定を初期化するための補助UF2です。
+
+### 8.5 ローカルビルド（Docker）
+
+GitHub Actionsではなくローカルで確認したい場合は、ZMK公式Dockerイメージを使用できます。以下はリポジトリルートで実行する例です。
+
+**Westワークスペース初期化（初回のみ）**:
+```bash
+docker run --rm -v "$PWD":/workspace -w /workspace zmkfirmware/zmk-build-arm:stable \
+   sh -c "west init -l config && west update && west zephyr-export"
+```
+
+**左側ビルド（ZMK Studio対応）**:
+```bash
+docker run --rm -v "$PWD":/workspace -w /workspace zmkfirmware/zmk-build-arm:stable \
+   west build -d build/left -p -s zmk/app -b xiao_ble -S studio-rpc-usb-uart -- \
+      -DSHIELD="cleave_hhjp_left rgbled_adapter" \
+      -DZMK_CONFIG=/workspace/config \
+      -DCONFIG_ZMK_STUDIO=y
+
+cp build/left/zephyr/zmk.uf2 cleave_hhjp_left-xiao_ble-zmk.uf2
+```
+
+**右側ビルド**:
+```bash
+docker run --rm -v "$PWD":/workspace -w /workspace zmkfirmware/zmk-build-arm:stable \
+   west build -d build/right -p -s zmk/app -b xiao_ble -- \
+      -DSHIELD="cleave_hhjp_right rgbled_adapter" \
+      -DZMK_CONFIG=/workspace/config
+
+cp build/right/zephyr/zmk.uf2 cleave_hhjp_right-xiao_ble-zmk.uf2
+```
+
+**settings resetビルド**:
+```bash
+docker run --rm -v "$PWD":/workspace -w /workspace zmkfirmware/zmk-build-arm:stable \
+   west build -d build/settings_reset -p -s zmk/app -b xiao_ble -- \
+      -DSHIELD=settings_reset \
+      -DZMK_CONFIG=/workspace/config
+
+cp build/settings_reset/zephyr/zmk.uf2 settings_reset-xiao_ble-zmk.uf2
+```
+
+**クリーンアップ**:
+```bash
+rm -rf build
+```
 
 ---
 
@@ -707,20 +801,25 @@ include:
 1. **build.yaml を編集**
 
    ```yaml
+   ---
    include:
-     - board: seeeduino_xiao_ble
-       shield: cleave_hhjp_left
-     - board: seeeduino_xiao_ble
-       shield: cleave_hhjp_right
+     - board: xiao_ble
+       shield: cleave_hhjp_left rgbled_adapter
+       snippet: studio-rpc-usb-uart
+       cmake-args: -DCONFIG_ZMK_STUDIO=y
+     - board: xiao_ble
+       shield: cleave_hhjp_right rgbled_adapter
+     - board: xiao_ble
+       shield: settings_reset
    ```
 
 ### 9.6 GitHub Actionsの有効化
 
 **手順**:
 
-1. **.github/workflows/build.yml を確認**
+1. **.github/workflows/build-firmware.yml を確認**
 
-   zmk-configテンプレートから初期化した場合、すでに `build.yml` が存在します。内容を確認し、必要に応じてカスタマイズします。
+    このリポジトリでは `build-firmware.yml` がZMK公式の再利用ワークフローを呼び出します。`config/`、`build.yaml`、ワークフロー本体を変更したときにビルドが走ることを確認します。
 
 2. **リポジトリにプッシュ**
 
@@ -742,16 +841,21 @@ include:
 
 **手順**:
 
-1. **Gitタグ作成**
+1. **ビルドartifactを確認**
 
-   ```bash
-   git tag v1.0.0
-   git push origin v1.0.0
-   ```
+   GitHub ActionsのBuild ZMK firmware実行から `firmware` artifactを確認し、リリースに含めるRun IDを控えます。
 
-2. **GitHub Releasesに自動アップロード**
+2. **Promote Firmware to Releaseを手動実行**
 
-   GitHub Actionsワークフローが自動的にReleaseを作成し、UF2ファイルを添付します（build.ymlの設定による）。
+   `.github/workflows/release.yml` の `workflow_dispatch` で以下を指定します。
+
+   - `run_id`: artifactがあるActionsのRun ID
+   - `version`: `v1.0.0` のようなリリースバージョン
+   - `prerelease`: プレリリースにする場合は `true`
+
+3. **Releaseを確認**
+
+   ワークフローがartifactをダウンロードし、指定したタグ名のGitHub ReleaseへUF2ファイルを添付します。
 
 ---
 
@@ -778,7 +882,7 @@ include:
 
 3. **UF2ファイルコピー**
 
-   - `cleave_hhjp_left-seeeduino_xiao_ble-zmk.uf2` をドライブにドラッグ&ドロップ
+   - 左側用UF2（例: `cleave_hhjp_left-xiao_ble-zmk.uf2`、またはartifact内で `cleave_hhjp_left` を含むUF2）をドライブにドラッグ&ドロップ
    - 自動的に書き込みが開始され、完了後に自動でアンマウント
 
 4. **書き込み完了**
@@ -793,7 +897,7 @@ include:
 1. 右側キーボードの電源スイッチをONにする
 2. USB Type-CケーブルでPCに接続
 3. XIAOのリセットボタンを**ダブルクリック**
-4. `cleave_hhjp_right-seeeduino_xiao_ble-zmk.uf2` をコピー
+4. 右側用UF2（例: `cleave_hhjp_right-xiao_ble-zmk.uf2`、またはartifact内で `cleave_hhjp_right` を含むUF2）をコピー
 5. 自動的に再起動
 
 ### 10.4 ペアリング（完全ワイヤレス動作）
@@ -816,8 +920,9 @@ include:
 
 3. **複数デバイス切替**
 
-   - Bluetoothレイヤー（Layer 2）で最大5台のデバイスを切替可能
-   - `BT_SEL 0`〜`BT_SEL 4` でデバイス切替
+   - Fnレイヤー上のBluetooth操作で最大5台のデバイスを切替可能
+   - `Fn` + `Ctrl` + `1`〜`5` で `BT_SEL 0`〜`BT_SEL 4` を実行
+   - `Fn` + `Ctrl` + `Backspace` で `BT_CLR` を実行
    - 例: PC、Mac、タブレット、スマートフォン等を切り替えて使用可能
 
 ### 10.5 トラブルシューティング
