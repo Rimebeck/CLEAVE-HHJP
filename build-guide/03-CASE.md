@@ -37,7 +37,7 @@ Cleave HHJP のケースを作る方法は大きく分けて2つあります。
 
 デフォルトケースは、ボトムケース、PCB、トッププレート、トップカバー、キースイッチなどを組み合わせて作成します。
 
-<img src="./images/case/case-assembly-overview.png" width="600px">
+<img src="./images/case/case-assembly-overview.png" width="800px">
 
 ## 用意するもの
 
