@@ -1,5 +1,7 @@
 # Cleave HHJP
 
+Cleave HHJP のドキュメントと関連リソースの入口です。組み立てる場合は、まずビルドガイドから進めてください。
+
 ## ドキュメント
 
 - [ビルドガイド](build-guide/README.md)
