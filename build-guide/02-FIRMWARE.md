@@ -16,7 +16,7 @@ Cleave HHJPはファームウェアをダウンロードし、左右それぞれ
 
 ## ファームウェアのダウンロード
 
-[ファームウェアのダウンロードページ](https://github.com/07JP27/Cleave-HHJP/releases)から最新バージョンの以下のUF2ファイルをダウンロードしてください。
+[ファームウェアのダウンロードページ](https://github.com/Rimebeck/Cleave-HHJP/releases)から最新バージョンの以下のUF2ファイルをダウンロードしてください。
 
 - `settings_reset-seeeduino_xiao_ble-zmk.uf2`
 - `cleave_hhjp_left.rgbled_adapter-seeeduino_xiao_ble-zmk.uf2`
