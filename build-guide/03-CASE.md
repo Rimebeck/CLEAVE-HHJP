@@ -1,8 +1,8 @@
-# Cleave HHJP ケースビルドガイド
+# CLEAVE HHJP ケースビルドガイド
 
 [目次に戻る](README.md)
 
-配布されている3Dモデルを使用して、Cleave HHJP のケースを作成する方法について説明します。
+配布されている3Dモデルを使用して、CLEAVE HHJP のケースを作成する方法について説明します。
 
 ## 目次
 
@@ -15,7 +15,7 @@
 
 ケースは、ベースケース（Base case）、PCB、トッププレート、トップカバー、キースイッチなどを組み合わせて作成します。
 
-<img src="./images/case/case-assembly-overview.png" alt="Cleave HHJPのケース分解図" width="800px">
+<img src="./images/case/case-assembly-overview.png" alt="CLEAVE HHJPのケース分解図" width="800px">
 
 ケースに必要な3Dプリント部品、ケース部材、素材の選び方は[準備ガイドのケース関連](00-PREPARE.md#ケース関連)で確認してください。
 
@@ -204,7 +204,7 @@ PCBにスイッチを差し込みながらサンドイッチします。
 ## 参考: 完成状態
 ケースの組み立てが完了すると、以下のような状態になります。写真はChocキースイッチとChoc用キーキャップを使用した例です。
 
-<img src="./images/case/13/1.jpg" alt="ChocキースイッチとChoc用キーキャップで組み立てたCleave HHJPの完成状態" width="600px">
+<img src="./images/case/13/1.jpg" alt="ChocキースイッチとChoc用キーキャップで組み立てたCLEAVE HHJPの完成状態" width="600px">
 
 ## ステップの完了
 ついにキーボードが完成しました。

@@ -1,5 +1,5 @@
 # ZMKファームウェア設計書
-## HHKB JP分割Bluetoothキーボード (Cleave HHJP)
+## HHKB JP分割Bluetoothキーボード (CLEAVE HHJP)
 
 ---
 
@@ -9,7 +9,7 @@
 
 | 項目 | 仕様 |
 |------|------|
-| 製品名 | Cleave HHJP (HHKB JP分割Bluetoothキーボード) |
+| 製品名 | CLEAVE HHJP (HHKB JP分割Bluetoothキーボード) |
 | キー配列 | HHKB JP配列ベース |
 | 総キー数 | 70キー（左31 + 右39） |
 | 分割方式 | 左右分割・無線接続 |
@@ -914,7 +914,7 @@ rm -rf build
 
    - **USB接続を外す**（充電・ファームウェア更新が完了したら抜く）
    - PCのBluetooth設定を開く
-   - 「Cleave HHJP」という名前のデバイスが表示される
+   - 「CLEAVE HHJP」という名前のデバイスが表示される
    - ペアリング実行
    - 接続完了後、キーボードが**完全ワイヤレス**で使用可能
 
@@ -946,7 +946,7 @@ rm -rf build
 - [ ] 左側キーボード電源ON後、User LEDが点滅（アドバタイジング）
 - [ ] 右側キーボード電源ON後、User LEDが点滅（アドバタイジング）
 - [ ] 左右が自動接続し、User LEDが青色点滅（接続済み）
-- [ ] **USB接続なし**でPCのBluetooth設定で「Cleave HHJP」が検出される
+- [ ] **USB接続なし**でPCのBluetooth設定で「CLEAVE HHJP」が検出される
 - [ ] **USB接続なし**でPCとペアリング完了後、全70キーが正常に入力される
 - [ ] **完全ワイヤレス状態**でFnキー押下時のレイヤー切替が動作（F1-F12等）
 - [ ] **完全ワイヤレス状態**でBluetoothレイヤーによるデバイス切替が動作
@@ -977,7 +977,7 @@ rm -rf build
 1. ブラウザで https://zmk.studio を開く
 2. **左側キーボードをUSB接続**（完全ワイヤレス動作中の場合は一時的にUSB接続）
 3. 「Connect」ボタンをクリック
-4. 「Cleave HHJP」が表示されることを確認
+4. 「CLEAVE HHJP」が表示されることを確認
 5. 接続後、70キーの物理レイアウトが表示されることを確認
 6. 任意のキーをクリックし、別のキーコードに変更
 7. 「Save」ボタンで保存

@@ -19,7 +19,7 @@
 
 	physical_layout: physical_layout {
 		compatible = "zmk,physical-layout";
-		display-name = "Cleave HHJP";
+		display-name = "CLEAVE HHJP";
 
 		transform = <&default_transform>;
 
