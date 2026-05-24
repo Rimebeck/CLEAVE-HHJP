@@ -62,6 +62,7 @@
 ナットの上面とケースの上面が揃うところまで押し込みます。
 <img src="./images/case/02/insernuts.png" alt="インサートナットの取り付け位置" width="800px">
 
+TODO圧入している図
 <img src="./images/case/02/2.jpg" alt="ベースケースのインサートナットを熱圧入した状態" width="600px">
 
 **完了チェック**
