@@ -31,7 +31,7 @@ Cleave HHJPはファームウェアをダウンロードし、左右それぞれ
 XIAO nRF52840 Plusをブートローダーモードにすると、`XIAO-SENSE`という名前のUSBドライブとして認識されます。
 
 1. PCと書き込み対象のXIAO nRF52840 PlusをUSB Type-Cケーブルで接続します。
-2. RESETボタンを爪楊枝の背中などを使い素早く2回押します。（ダブルクリック）
+2. RESETボタンを爪楊枝の柄側などを使い素早く2回押します。（ダブルクリック）
 
     <img src="./images/firmware/reset-button/1.jpg" alt="XIAO nRF52840 PlusのRESETボタン位置" width="600px">
 
