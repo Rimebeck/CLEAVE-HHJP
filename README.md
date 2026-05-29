@@ -15,12 +15,12 @@
 ## ドキュメント
 
 - [ビルドガイド](build-guide/README.md)
-  組み立て、ファームウェア書き込み、ケース作成、完成後の使い方をまとめています。
+  組み立て、ファームウェア書き込み、ケース作成、完成後の使い方、カスタマイズ方法をまとめています。
 
 ## 関連リンク
 
 - [ファームウェア配布ページ](https://github.com/Rimebeck/Cleave-HHJP/releases)
-- [ケースの3Dモデル](https://github.com/Rimebeck/Cleave-HHJP/tree/main/models)
+- [ケースの3Dモデル・PCB 3Dデータ](https://github.com/Rimebeck/Cleave-HHJP/tree/main/models)
 
 ## 問い合わせ・不具合報告
 
