@@ -25,3 +25,6 @@
 ## 問い合わせ・不具合報告
 
 ご不明な点はビルドガイドリポジトリの[Issues](https://github.com/Rimebeck/Cleave-HHJP/issues)またはBOOTHの購入者問合せからご連絡ください。
+
+----
+QRコードは株式会社デンソーウェーブの登録商標です
