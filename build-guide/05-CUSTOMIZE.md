@@ -235,7 +235,7 @@ ZMK Studioで保存した設定を消してファームウェア側の初期キ�
 - [ZMK公式: Keymaps & Behaviors](https://zmk.dev/docs/keymaps)
 - [ZMK公式: List of Keycodes](https://zmk.dev/docs/keymaps/list-of-keycodes)
 - [ファームウェアのダウンロード・書き込み・接続確認](02-FIRMWARE.md)
-- [標準ケースビルドガイド](03-CASE.md)
+- [標準ケースビルドガイド](03-0-STANDARD_CASE.md)
 - [簡易ケースビルドガイド](03-1-SIMPLE_CASE.md)
 - [オリジナルケース作成ガイド](03-2-CUSTOM_CASE.md)
 - [PCB外形データ](../models/pcb)
