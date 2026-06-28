@@ -86,7 +86,7 @@ GitHub Actionsは、GitHub上でファームウェアを自動ビルドする仕
 
 GitHub上で直接ファイルを編集する場合は、Gitのコマンド操作は必須ではありません。GitHubのFork操作に慣れていない場合は、[GitHub公式のフォーク手順](https://docs.github.com/ja/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo)も参照してください。
 
-### 最初に触るファイル
+### 最初に変更するファイル
 
 はじめてファームウェアを変更する場合は、まず`cleave_hhjp.keymap`だけを編集することを推奨します。
 
