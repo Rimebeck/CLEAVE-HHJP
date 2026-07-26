@@ -20,6 +20,10 @@
 
 <img src="./images/usage/default-keymap.png" alt="CLEAVE HHJPのデフォルトキーマップ" width="100%">
 
+以下のリンクからキーテスターを使用することで正常に動作しているかを確認できます。
+
+https://rimebeck.github.io/Keyboard-tester/?keyboard=wlsphhjp
+
 ### 電源スイッチ
 
 左右のケース側面にある電源スイッチで、左右それぞれの電源をON/OFFします。キーボードとして使用する場合は、左右両方の電源をONにします。
